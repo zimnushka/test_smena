@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:test_smena/app/router.dart';
 
-class MenuRoute implements AppPage {
+class BuscetRoute implements AppPage {
   @override
-  String get name => 'menu';
+  String get name => 'buscet';
 
   @override
   Map<String, String>? get params => null;
@@ -12,15 +12,14 @@ class MenuRoute implements AppPage {
   Map<String, String>? get queryParams => null;
 }
 
-class MenuPage extends StatelessWidget {
-  static AppPage route() => MenuRoute();
+class BuscetPage extends StatelessWidget {
+  const BuscetPage({super.key});
 
-  const MenuPage({super.key});
-
+  static AppPage route() => BuscetRoute();
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.blue,
+      color: Colors.red,
     );
   }
 }

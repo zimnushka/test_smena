@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 ThemeData lightTheme =
     ThemeData.light().copyWith(scaffoldBackgroundColor: const Color.fromARGB(255, 225, 225, 225));
 ThemeData darkTheme = ThemeData.dark().copyWith();
 
-ThemeData setPrimaryColor(ThemeData data, Color color) {
+ThemeData setPrimaryColor(bool isLightTheme, Color color) {
+  final data = isLightTheme ? lightTheme : darkTheme;
+
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarIconBrightness: isLightTheme ? Brightness.dark : Brightness.light,
+    systemNavigationBarColor: isLightTheme ? Colors.white : Colors.black,
+    statusBarColor: isLightTheme ? Colors.white : Colors.black,
+  ));
+
   return data.copyWith(
       textSelectionTheme: TextSelectionThemeData(
         cursorColor: color,

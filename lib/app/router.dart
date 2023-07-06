@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
+import 'package:test_smena/layers/ui/bascet/page.dart';
 import 'package:test_smena/layers/ui/menu/page.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -13,18 +13,24 @@ class AppRouter {
   static void init() {
     _router = GoRouter(
       navigatorKey: navigatorKey,
+      initialLocation: '/',
       routes: [
         GoRoute(
           name: MenuPage.route().name,
           path: '/',
           pageBuilder: (context, state) => const MaterialPage(child: MenuPage()),
         ),
+        GoRoute(
+          name: BuscetPage.route().name,
+          path: '/buscet',
+          pageBuilder: (context, state) => const MaterialPage(child: BuscetPage()),
+        ),
       ],
     );
   }
 
   static Future<void> goTo(AppPage page) async {
-    GoRouter.of(context).pushNamed(
+    _router.pushNamed(
       page.name,
       pathParameters: page.params ?? {},
       queryParameters: page.queryParams ?? {},
@@ -32,8 +38,8 @@ class AppRouter {
   }
 
   static Future<void> pop() async {
-    if (GoRouter.of(context).canPop()) {
-      GoRouter.of(context).pop();
+    if (_router.canPop()) {
+      _router.pop();
     }
   }
 

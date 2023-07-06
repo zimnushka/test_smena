@@ -57,6 +57,6 @@ class AppProvider extends Cubit<AppProviderState> {
   }
 
   ThemeData _themeFromBool(bool isLightTheme) {
-    return setPrimaryColor(isLightTheme ? lightTheme : darkTheme, AppColors.primary);
+    return setPrimaryColor(isLightTheme, AppColors.primary);
   }
 }
