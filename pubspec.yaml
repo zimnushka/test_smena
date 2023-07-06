@@ -15,6 +15,8 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
+  intl: 0.18.0
+
   # State managment
   bloc: 8.1.2
   flutter_bloc: 8.1.3
@@ -23,7 +25,12 @@ dependencies:
   # Rest api
   dio: 5.2.1
 
-  intl: 0.18.0
+  # Navigation
+  go_router: 9.0.0
+
+  # Storage
+  shared_preferences: 2.2.0
+  
 
 
 
