@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:test_smena/layers/models/schemes.dart';
 import 'package:test_smena/layers/storage/storage.dart';
 
 part 'bascet_product.g.dart';
@@ -39,4 +40,17 @@ class BascetProduct extends HiveObject {
     required this.name,
     required this.sizes,
   });
+
+  factory BascetProduct.fromProduct(int count, Product item) {
+    return BascetProduct(
+      id: item.id,
+      categoryId: item.categoryId,
+      cost: item.cost,
+      count: count,
+      description: item.description,
+      imageUrl: item.imageUrl,
+      name: item.name,
+      sizes: item.sizes,
+    );
+  }
 }
