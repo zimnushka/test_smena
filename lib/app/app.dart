@@ -28,6 +28,7 @@ class _TestSmenaAppState extends State<TestSmenaApp> {
         bloc: appProvider,
         builder: (context, state) {
           return MaterialApp.router(
+            debugShowCheckedModeBanner: appProvider.state.config.isDebug,
             title: 'Test smena app',
             routeInformationProvider: AppRouter.goRouter.routeInformationProvider,
             routeInformationParser: AppRouter.goRouter.routeInformationParser,

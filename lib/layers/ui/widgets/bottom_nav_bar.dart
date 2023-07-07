@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:test_smena/app/router.dart';
 import 'package:test_smena/layers/ui/bascet/page.dart';
 import 'package:test_smena/layers/ui/menu/page.dart';
