@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-ThemeData lightTheme =
-    ThemeData.light().copyWith(scaffoldBackgroundColor: const Color.fromARGB(255, 225, 225, 225));
+ThemeData lightTheme = ThemeData.light().copyWith(
+  scaffoldBackgroundColor: Colors.white,
+);
 ThemeData darkTheme = ThemeData.dark().copyWith();
 
 ThemeData setPrimaryColor(bool isLightTheme, Color color) {
@@ -20,8 +21,8 @@ ThemeData setPrimaryColor(bool isLightTheme, Color color) {
         selectionColor: Colors.grey.withOpacity(0.3),
         selectionHandleColor: Colors.grey.withOpacity(0.3),
       ),
-      cardTheme:
-          const CardTheme(shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(radius))),
+      cardTheme: const CardTheme(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16)))),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         border: const OutlineInputBorder(
@@ -47,6 +48,11 @@ ThemeData setPrimaryColor(bool isLightTheme, Color color) {
       floatingActionButtonTheme: FloatingActionButtonThemeData(backgroundColor: color),
       colorScheme: data.colorScheme.copyWith(background: data.scaffoldBackgroundColor),
       scaffoldBackgroundColor: data.scaffoldBackgroundColor,
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        backgroundColor: Colors.white,
+        selectedItemColor: Color.fromRGBO(44, 47, 57, 1),
+        unselectedItemColor: Color.fromRGBO(158, 167, 182, 1),
+      ),
       listTileTheme: ListTileThemeData(
           selectedColor: color,
           shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(radius))));
@@ -54,7 +60,7 @@ ThemeData setPrimaryColor(bool isLightTheme, Color color) {
 
 const defaultPrimaryColor = Color.fromARGB(255, 76, 175, 158);
 
-const radius = Radius.circular(10);
+const radius = Radius.circular(16);
 const double defaultPadding = 20;
 
 const double kSideBarWidth = 230;

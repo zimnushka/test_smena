@@ -1,10 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:test_smena/app/configs.dart';
-import 'package:test_smena/layers/storage/config.dart';
-import 'package:test_smena/layers/storage/theme.dart';
+import 'package:test_smena/layers/repositories/repository.dart';
+import 'package:test_smena/layers/storage/impl/config.dart';
+import 'package:test_smena/layers/storage/impl/theme.dart';
 import 'package:test_smena/layers/styles/colors.dart';
 import 'package:test_smena/layers/styles/themes.dart';
 
@@ -37,12 +37,14 @@ class AppProvider extends Cubit<AppProviderState> {
   final _configStorage = ConfigStorage();
 
   Future<void> load() async {
-    final isLightTheme = await _themeStorage.get();
-    final config = await _configStorage.get();
+    final isLightTheme = (await _themeStorage.get()) ?? true;
+    final config = (await _configStorage.get()) ?? defaultConfig;
 
-    AppProviderState newState = AppProviderState(
-      theme: _themeFromBool(isLightTheme ?? true),
-      config: config ?? defaultConfig,
+    ApiRepository.setConfig(config);
+
+    final AppProviderState newState = AppProviderState(
+      theme: _themeFromBool(isLightTheme),
+      config: config,
     );
 
     emit(newState);
@@ -52,7 +54,7 @@ class AppProvider extends Cubit<AppProviderState> {
     if (await _themeStorage.save(isLightTheme)) {
       emit(state.copyWith(theme: _themeFromBool(isLightTheme)));
     } else {
-      //TODO(kirill): snackbar
+      // TODO(kirill): snackbar
     }
   }
 

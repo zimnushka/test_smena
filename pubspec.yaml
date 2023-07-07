@@ -30,6 +30,13 @@ dependencies:
 
   # Storage
   shared_preferences: 2.2.0
+
+  # Generations
+  json_annotation: any
+  freezed_annotation: any
+
+  #UI
+  flutter_svg: 2.0.7
   
 
 
@@ -38,17 +45,19 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  json_serializable: any
+  build_runner: any
+  freezed: any
+
   flutter_lints: ^2.0.0
 
 
 flutter:
   uses-material-design: true
-  generate: true # Add this line
+  generate: true
 
-  # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/
 
 
   # fonts:

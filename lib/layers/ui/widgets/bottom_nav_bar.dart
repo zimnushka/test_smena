@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:test_smena/app/router.dart';
+import 'package:test_smena/layers/styles/icons.dart';
 import 'package:test_smena/layers/ui/bascet/page.dart';
 import 'package:test_smena/layers/ui/menu/page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AppBottomNavBar extends StatefulWidget {
   const AppBottomNavBar({super.key});
@@ -17,9 +18,33 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
     return BottomNavigationBar(
       currentIndex: _calculateSelectedIndex(context),
       onTap: onTap,
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-        BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
+      items: [
+        BottomNavigationBarItem(
+          icon: AppIcon(
+            AppIcons.eat,
+            size: 24,
+            color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
+          ),
+          activeIcon: AppIcon(
+            AppIcons.eat,
+            size: 24,
+            color: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
+          ),
+          label: AppLocalizations.of(context)!.eat,
+        ),
+        BottomNavigationBarItem(
+          icon: AppIcon(
+            AppIcons.basket,
+            size: 24,
+            color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
+          ),
+          activeIcon: AppIcon(
+            AppIcons.basket,
+            size: 24,
+            color: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
+          ),
+          label: AppLocalizations.of(context)!.buscet,
+        ),
       ],
     );
   }
@@ -36,15 +61,15 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
     return 0;
   }
 
-  void onTap(int value) async {
+  Future<void> onTap(int value) async {
     switch (value) {
       case 0:
-        AppRouter.goTo(MenuPage.route());
+        await AppRouter.goTo(MenuPage.route());
       case 1:
-        AppRouter.goTo(BuscetPage.route());
+        await AppRouter.goTo(BuscetPage.route());
 
       default:
-        AppRouter.goTo(MenuPage.route());
+        await AppRouter.goTo(MenuPage.route());
     }
     setState(() {});
   }

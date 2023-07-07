@@ -28,6 +28,8 @@ class _TestSmenaAppState extends State<TestSmenaApp> {
         bloc: appProvider,
         builder: (context, state) {
           return MaterialApp.router(
+            debugShowCheckedModeBanner: state.config.isDebug,
+            theme: state.theme,
             title: 'Test smena app',
             routeInformationProvider: AppRouter.goRouter.routeInformationProvider,
             routeInformationParser: AppRouter.goRouter.routeInformationParser,
@@ -43,16 +45,18 @@ class _TestSmenaAppState extends State<TestSmenaApp> {
               Locale('ru'),
             ],
             builder: (context, child) {
-              return Overlay(initialEntries: [
-                OverlayEntry(
-                  builder: (context) {
-                    return Scaffold(
-                      body: child ?? const SizedBox(),
-                      bottomNavigationBar: const AppBottomNavBar(),
-                    );
-                  },
-                )
-              ]);
+              return Overlay(
+                initialEntries: [
+                  OverlayEntry(
+                    builder: (context) {
+                      return Scaffold(
+                        body: SafeArea(top: true, child: child ?? const SizedBox()),
+                        bottomNavigationBar: const AppBottomNavBar(),
+                      );
+                    },
+                  )
+                ],
+              );
             },
           );
         });
