@@ -65,35 +65,37 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
-      color: Theme.of(context).primaryColor,
-      onRefresh: () async => _bloc(context).add(const OnRefresh()),
-      child: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 19),
-        child: CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 24, top: 16),
-                child: AppTitleText(AppLocalizations.of(context)!.categories),
+    return Scaffold(
+      body: RefreshIndicator(
+        color: Theme.of(context).primaryColor,
+        onRefresh: () async => _bloc(context).add(const OnRefresh()),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 20, right: 19),
+          child: CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 24, top: 16),
+                  child: AppTitleText(AppLocalizations.of(context)!.categories),
+                ),
               ),
-            ),
-            SliverGrid.count(
-              crossAxisCount: 2,
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
-              children: state.categories
-                  .map(
-                    (item) => MenuCard(
-                      item,
-                      onTap: () => _bloc(context).add(
-                        OnTapCategory(item.id),
+              SliverGrid.count(
+                crossAxisCount: 2,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+                children: state.categories
+                    .map(
+                      (item) => MenuCard(
+                        item,
+                        onTap: () => _bloc(context).add(
+                          OnTapCategory(item.id),
+                        ),
                       ),
-                    ),
-                  )
-                  .toList(),
-            ),
-          ],
+                    )
+                    .toList(),
+              ),
+            ],
+          ),
         ),
       ),
     );

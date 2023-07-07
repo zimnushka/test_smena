@@ -29,43 +29,45 @@ class BuscetPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<BascetProvider, BascetState>(builder: (context, state) {
       final List<BascetProduct> products = state.products.entries.map((e) => e.value).toList();
-      return RefreshIndicator(
-        color: Theme.of(context).primaryColor,
-        onRefresh: () => _bloc(context).load(),
-        child: Padding(
-          padding: const EdgeInsets.only(left: 20, right: 5),
-          child: CustomScrollView(
-            slivers: [
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 24, top: 16),
-                  child: Row(
-                    children: [
-                      const BackButton(),
-                      Expanded(child: AppTitleText(AppLocalizations.of(context)!.buscet)),
-                    ],
+      return Scaffold(
+        body: RefreshIndicator(
+          color: Theme.of(context).primaryColor,
+          onRefresh: () => _bloc(context).load(),
+          child: Padding(
+            padding: const EdgeInsets.only(left: 20, right: 5),
+            child: CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 24, top: 16),
+                    child: Row(
+                      children: [
+                        const BackButton(),
+                        Expanded(child: AppTitleText(AppLocalizations.of(context)!.buscet)),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) {
-                    return BascetProductCard(products[index], onTap: () async {
-                      await showModalBottomSheet(
-                        useSafeArea: true,
-                        isScrollControlled: true,
-                        isDismissible: true,
-                        context: AppRouter.context,
-                        builder: (context) {
-                          return ProductDetail(products[index].toProduct());
-                        },
-                      );
-                    });
-                  },
-                  childCount: state.products.length,
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) {
+                      return BascetProductCard(products[index], onTap: () async {
+                        await showModalBottomSheet(
+                          useSafeArea: true,
+                          isScrollControlled: true,
+                          isDismissible: true,
+                          context: AppRouter.context,
+                          builder: (context) {
+                            return ProductDetail(products[index].toProduct());
+                          },
+                        );
+                      });
+                    },
+                    childCount: state.products.length,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       );

@@ -70,39 +70,41 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
-      color: Theme.of(context).primaryColor,
-      onRefresh: () async => _bloc(context).add(const OnRefresh()),
-      child: Padding(
-        padding: const EdgeInsets.only(left: 10, right: 9),
-        child: CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 24, top: 16),
-                child: Row(
-                  children: [
-                    const BackButton(),
-                    Expanded(child: AppTitleText(state.category.categoryName)),
-                  ],
+    return Scaffold(
+      body: RefreshIndicator(
+        color: Theme.of(context).primaryColor,
+        onRefresh: () async => _bloc(context).add(const OnRefresh()),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 10, right: 9),
+          child: CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 24, top: 16),
+                  child: Row(
+                    children: [
+                      const BackButton(),
+                      Expanded(child: AppTitleText(state.category.categoryName)),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            SliverGrid.count(
-              crossAxisCount: 2,
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
-              childAspectRatio: 1 / 1.3,
-              children: state.category.products
-                  .map(
-                    (item) => ProductCard(
-                      item,
-                      onTap: () => _bloc(context).add(OnTapProduct(item)),
-                    ),
-                  )
-                  .toList(),
-            ),
-          ],
+              SliverGrid.count(
+                crossAxisCount: 2,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+                childAspectRatio: 1 / 1.3,
+                children: state.category.products
+                    .map(
+                      (item) => ProductCard(
+                        item,
+                        onTap: () => _bloc(context).add(OnTapProduct(item)),
+                      ),
+                    )
+                    .toList(),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -19,22 +19,40 @@ class AppRouter {
         GoRoute(
           name: MenuPage.route().name,
           path: '/',
-          pageBuilder: (context, state) => const MaterialPage(child: MenuPage()),
+          pageBuilder: (context, state) => _builder(state, const MenuPage()),
         ),
         GoRoute(
           name: BuscetPage.route().name,
           path: '/buscet',
-          pageBuilder: (context, state) => const MaterialPage(child: BuscetPage()),
+          pageBuilder: (context, state) => _builder(state, const BuscetPage()),
         ),
         GoRoute(
           name: CategoryPage.route(0).name,
           path: '/category/:categoryId',
-          pageBuilder: (context, state) => MaterialPage(
-              child: CategoryPage(
-            int.parse(state.pathParameters['categoryId']!),
-          )),
+          pageBuilder: (context, state) =>
+              _builder(state, CategoryPage(int.parse(state.pathParameters['categoryId']!))),
         ),
       ],
+    );
+  }
+
+  static CustomTransitionPage _builder(GoRouterState state, Widget child) {
+    return CustomTransitionPage(
+      key: state.pageKey,
+      child: child,
+      transitionDuration: const Duration(milliseconds: 500),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(1, 0);
+        const end = Offset.zero;
+        const curve = Curves.ease;
+
+        final tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        return SlideTransition(
+          position: animation.drive(tween),
+          child: child,
+        );
+      },
     );
   }
 

@@ -5,7 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:test_smena/app/app_provider.dart';
 import 'package:test_smena/app/router.dart';
 import 'package:test_smena/layers/bloc/bascet/buscet_cubit.dart';
-import 'package:test_smena/layers/ui/widgets/bottom_nav_bar.dart';
+import 'package:test_smena/layers/ui/widgets/landing.dart';
 
 class TestSmenaApp extends StatefulWidget {
   const TestSmenaApp({super.key});
@@ -51,18 +51,7 @@ class _TestSmenaAppState extends State<TestSmenaApp> {
                 Locale('ru'),
               ],
               builder: (context, child) {
-                return Overlay(
-                  initialEntries: [
-                    OverlayEntry(
-                      builder: (context) {
-                        return Scaffold(
-                          body: SafeArea(top: true, child: child ?? const SizedBox()),
-                          bottomNavigationBar: const AppBottomNavBar(),
-                        );
-                      },
-                    )
-                  ],
-                );
+                return Landing(child ?? const SizedBox());
               },
             );
           }),
