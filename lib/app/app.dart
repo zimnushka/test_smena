@@ -45,16 +45,18 @@ class _TestSmenaAppState extends State<TestSmenaApp> {
               Locale('ru'),
             ],
             builder: (context, child) {
-              return Overlay(initialEntries: [
-                OverlayEntry(
-                  builder: (context) {
-                    return Scaffold(
-                      body: SafeArea(top: true, child: child ?? const SizedBox()),
-                      bottomNavigationBar: const AppBottomNavBar(),
-                    );
-                  },
-                )
-              ]);
+              return Overlay(
+                initialEntries: [
+                  OverlayEntry(
+                    builder: (context) {
+                      return Scaffold(
+                        body: SafeArea(top: true, child: child ?? const SizedBox()),
+                        bottomNavigationBar: const AppBottomNavBar(),
+                      );
+                    },
+                  )
+                ],
+              );
             },
           );
         });

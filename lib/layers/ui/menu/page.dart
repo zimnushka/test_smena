@@ -4,7 +4,9 @@ import 'package:test_smena/app/router.dart';
 import 'package:test_smena/layers/bloc/menu/menu_bloc.dart';
 import 'package:test_smena/layers/bloc/menu/menu_event.dart';
 import 'package:test_smena/layers/bloc/menu/menu_state.dart';
+import 'package:test_smena/layers/styles/text.dart';
 import 'package:test_smena/layers/ui/menu/card.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 MenuBloc _bloc(BuildContext context) => BlocProvider.of(context);
 
@@ -64,11 +66,18 @@ class _Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
+      color: Theme.of(context).primaryColor,
       onRefresh: () async => _bloc(context).add(const OnRefresh()),
       child: Padding(
         padding: const EdgeInsets.only(left: 20, right: 19),
         child: CustomScrollView(
           slivers: [
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 24, top: 16),
+                child: AppTitleText(AppLocalizations.of(context)!.categories),
+              ),
+            ),
             SliverGrid.count(
               crossAxisCount: 2,
               mainAxisSpacing: 10,

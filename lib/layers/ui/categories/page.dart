@@ -4,6 +4,7 @@ import 'package:test_smena/app/router.dart';
 import 'package:test_smena/layers/bloc/categories/category_bloc.dart';
 import 'package:test_smena/layers/bloc/categories/category_event.dart';
 import 'package:test_smena/layers/bloc/categories/category_state.dart';
+import 'package:test_smena/layers/styles/text.dart';
 import 'package:test_smena/layers/ui/categories/card.dart';
 
 CategoryBloc _bloc(BuildContext context) => BlocProvider.of(context);
@@ -49,7 +50,7 @@ class _CategoryPageState extends State<CategoryPage> {
       child: BlocBuilder<CategoryBloc, CategoryState>(
         bloc: menuBloc,
         builder: (context, state) {
-          //TODO(kirill): error state
+          // TODO(kirill): error state
           if (state is LoadedState) {
             return _Body(state: state);
           }
@@ -70,11 +71,23 @@ class _Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
+      color: Theme.of(context).primaryColor,
       onRefresh: () async => _bloc(context).add(const OnRefresh()),
       child: Padding(
         padding: const EdgeInsets.only(left: 10, right: 9),
         child: CustomScrollView(
           slivers: [
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 24, top: 16),
+                child: Row(
+                  children: [
+                    const BackButton(),
+                    Expanded(child: AppTitleText(state.category.categoryName)),
+                  ],
+                ),
+              ),
+            ),
             SliverGrid.count(
               crossAxisCount: 2,
               mainAxisSpacing: 10,

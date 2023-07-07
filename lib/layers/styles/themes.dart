@@ -48,6 +48,11 @@ ThemeData setPrimaryColor(bool isLightTheme, Color color) {
       floatingActionButtonTheme: FloatingActionButtonThemeData(backgroundColor: color),
       colorScheme: data.colorScheme.copyWith(background: data.scaffoldBackgroundColor),
       scaffoldBackgroundColor: data.scaffoldBackgroundColor,
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        backgroundColor: Colors.white,
+        selectedItemColor: Color.fromRGBO(44, 47, 57, 1),
+        unselectedItemColor: Color.fromRGBO(158, 167, 182, 1),
+      ),
       listTileTheme: ListTileThemeData(
           selectedColor: color,
           shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(radius))));
@@ -55,7 +60,7 @@ ThemeData setPrimaryColor(bool isLightTheme, Color color) {
 
 const defaultPrimaryColor = Color.fromARGB(255, 76, 175, 158);
 
-const radius = Radius.circular(10);
+const radius = Radius.circular(16);
 const double defaultPadding = 20;
 
 const double kSideBarWidth = 230;

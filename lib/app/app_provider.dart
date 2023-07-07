@@ -42,7 +42,7 @@ class AppProvider extends Cubit<AppProviderState> {
 
     ApiRepository.setConfig(config);
 
-    AppProviderState newState = AppProviderState(
+    final AppProviderState newState = AppProviderState(
       theme: _themeFromBool(isLightTheme),
       config: config,
     );
@@ -54,7 +54,7 @@ class AppProvider extends Cubit<AppProviderState> {
     if (await _themeStorage.save(isLightTheme)) {
       emit(state.copyWith(theme: _themeFromBool(isLightTheme)));
     } else {
-      //TODO(kirill): snackbar
+      // TODO(kirill): snackbar
     }
   }
 

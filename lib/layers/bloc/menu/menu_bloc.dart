@@ -17,7 +17,7 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
   Future<void> _onLoad(OnLoad event, Emitter emit) async {
     final categoriesResponce = await _categoriesRepository.getCategories();
     final categories = categoriesResponce.data ?? [];
-    //TODO(kirill): add snckbar if list is empty
+    // TODO(kirill): add snckbar if list is empty
     emit(LoadedState(categories));
   }
 
@@ -26,7 +26,7 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
     emit(LoadingState());
     try {
       final categories = (await _categoriesRepository.getCategories()).data ?? [];
-      //TODO(kirill): add snckbar if list is empty
+      // TODO(kirill): add snckbar if list is empty
       emit(LoadedState(categories));
     } catch (e) {
       // Если произойдет сбой, чтобы не было бесконечной загрузки, отображаю предыдущее состояние
@@ -35,6 +35,6 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
   }
 
   Future<void> _onTapCategory(OnTapCategory event, Emitter emit) async {
-    AppRouter.goTo(CategoryPage.route(event.id));
+    await AppRouter.goTo(CategoryPage.route(event.id));
   }
 }

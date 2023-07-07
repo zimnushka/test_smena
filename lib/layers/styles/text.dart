@@ -10,7 +10,8 @@ class AppTitleText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(text,
-        maxLines: maxLines, style: TextStyle(fontSize: 20, fontWeight: weight, color: color));
+        maxLines: maxLines,
+        style: TextStyle(fontSize: 20, fontWeight: weight ?? FontWeight.w800, color: color));
   }
 }
 

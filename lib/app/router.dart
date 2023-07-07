@@ -39,7 +39,7 @@ class AppRouter {
   }
 
   static Future<void> goTo(AppPage page) async {
-    _router.pushNamed(
+    await _router.pushNamed(
       page.name,
       pathParameters: page.params ?? {},
       queryParameters: page.queryParams ?? {},

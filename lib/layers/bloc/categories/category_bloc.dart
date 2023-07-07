@@ -18,7 +18,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     final categoriesResponce = await _categoriesRepository.getCategoryById(event.id);
     final category = categoriesResponce.data ?? [];
     if (category.isEmpty) {
-      //TODO(kirill): add snckbar if list is empty
+      // TODO(kirill): add snckbar if list is empty
       // emit(ErrorState(id, message));
       return;
     }
@@ -36,7 +36,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       final categoriesResponce = await _categoriesRepository.getCategoryById(currentState.id);
       final category = categoriesResponce.data ?? [];
       if (category.isEmpty) {
-        //TODO(kirill): add snckbar if list is empty
+        // TODO(kirill): add snckbar if list is empty
         // emit(ErrorState(id, message));
         return;
       }
