@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-ThemeData lightTheme =
-    ThemeData.light().copyWith(scaffoldBackgroundColor: const Color.fromARGB(255, 225, 225, 225));
+ThemeData lightTheme = ThemeData.light().copyWith(
+  scaffoldBackgroundColor: Colors.white,
+);
 ThemeData darkTheme = ThemeData.dark().copyWith();
 
 ThemeData setPrimaryColor(bool isLightTheme, Color color) {
@@ -20,8 +21,8 @@ ThemeData setPrimaryColor(bool isLightTheme, Color color) {
         selectionColor: Colors.grey.withOpacity(0.3),
         selectionHandleColor: Colors.grey.withOpacity(0.3),
       ),
-      cardTheme:
-          const CardTheme(shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(radius))),
+      cardTheme: const CardTheme(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16)))),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         border: const OutlineInputBorder(

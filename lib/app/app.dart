@@ -28,7 +28,8 @@ class _TestSmenaAppState extends State<TestSmenaApp> {
         bloc: appProvider,
         builder: (context, state) {
           return MaterialApp.router(
-            debugShowCheckedModeBanner: appProvider.state.config.isDebug,
+            debugShowCheckedModeBanner: state.config.isDebug,
+            theme: state.theme,
             title: 'Test smena app',
             routeInformationProvider: AppRouter.goRouter.routeInformationProvider,
             routeInformationParser: AppRouter.goRouter.routeInformationParser,
@@ -48,7 +49,7 @@ class _TestSmenaAppState extends State<TestSmenaApp> {
                 OverlayEntry(
                   builder: (context) {
                     return Scaffold(
-                      body: child ?? const SizedBox(),
+                      body: SafeArea(top: true, child: child ?? const SizedBox()),
                       bottomNavigationBar: const AppBottomNavBar(),
                     );
                   },
