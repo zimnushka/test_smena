@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test_smena/layers/models/schemes.dart';
 import 'package:test_smena/layers/styles/text.dart';
+import 'package:test_smena/layers/ui/widgets/add_product_button.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard(this.item, {required this.onTap, super.key});
@@ -19,11 +20,22 @@ class ProductCard extends StatelessWidget {
             children: [
               Image.network(item.imageUrl),
               Padding(
-                padding: const EdgeInsets.fromLTRB(0, 15, 45, 0),
+                padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
                 child: AppSmallText(
                   item.name,
                   weight: FontWeight.w600,
                 ),
+              ),
+              const Expanded(child: SizedBox()),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  AppText(
+                    '${item.cost} ₽',
+                    weight: FontWeight.w800,
+                  ),
+                  AddProductButton(item),
+                ],
               ),
             ],
           ),

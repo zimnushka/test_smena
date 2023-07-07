@@ -92,7 +92,7 @@ class _Body extends StatelessWidget {
               crossAxisCount: 2,
               mainAxisSpacing: 10,
               crossAxisSpacing: 10,
-              childAspectRatio: 1 / 1.5,
+              childAspectRatio: 1 / 1.3,
               children: state.category.products
                   .map(
                     (item) => ProductCard(

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_smena/app/router.dart';
+import 'package:test_smena/layers/bloc/bascet/buscet_cubit.dart';
 import 'package:test_smena/layers/styles/icons.dart';
 import 'package:test_smena/layers/ui/bascet/page.dart';
 import 'package:test_smena/layers/ui/menu/page.dart';
@@ -15,6 +17,12 @@ class AppBottomNavBar extends StatefulWidget {
 class _AppBottomNavBarState extends State<AppBottomNavBar> {
   @override
   Widget build(BuildContext context) {
+    final bascetProviderState = context.watch<BascetProvider>().state;
+    int sum = 0;
+    bascetProviderState.products.forEach((key, value) {
+      sum = sum + value.cost * value.count;
+    });
+
     return BottomNavigationBar(
       currentIndex: _calculateSelectedIndex(context),
       onTap: onTap,
@@ -43,7 +51,7 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
             size: 24,
             color: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
           ),
-          label: AppLocalizations.of(context)!.buscet,
+          label: sum > 0 ? '$sum ₽' : AppLocalizations.of(context)!.buscet,
         ),
       ],
     );

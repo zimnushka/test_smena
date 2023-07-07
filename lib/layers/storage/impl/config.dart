@@ -1,6 +1,4 @@
-import 'dart:convert';
-
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:test_smena/app/configs.dart';
 import 'package:test_smena/layers/storage/storage.dart';
 
@@ -8,35 +6,19 @@ class ConfigStorage implements AppStorage<AppConfig> {
   @override
   String get storageKey => 'configStorageKey';
 
-  @override
-  Future<AppConfig?> get() async {
-    final pref = await SharedPreferences.getInstance();
-    try {
-      final configData = (pref.getString(storageKey)) ?? '';
-      final Map<String, dynamic> json = jsonDecode(configData);
-      return AppConfig.fromJson(json);
-    } catch (e) {
-      return null;
-    }
+  Future<AppConfig?> read() async {
+    final box = await Hive.openBox<AppConfig>(storageKey);
+    return box.get(storageKey);
   }
 
-  @override
-  Future<bool> save(AppConfig config) async {
-    final pref = await SharedPreferences.getInstance();
-    try {
-      return await pref.setString(storageKey, jsonEncode(config.toJson()));
-    } catch (e) {
-      return false;
-    }
+  Future<void> write(AppConfig item) async {
+    final box = await Hive.openBox<AppConfig>(storageKey);
+    await box.put(storageKey, item);
   }
 
-  @override
   Future<bool> delete() async {
-    final pref = await SharedPreferences.getInstance();
-    try {
-      return await pref.remove(storageKey);
-    } catch (e) {
-      return false;
-    }
+    final box = await Hive.openBox<AppConfig>(storageKey);
+    await box.deleteFromDisk();
+    return true;
   }
 }

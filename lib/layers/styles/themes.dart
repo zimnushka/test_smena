@@ -53,6 +53,7 @@ ThemeData setPrimaryColor(bool isLightTheme, Color color) {
         selectedItemColor: Color.fromRGBO(44, 47, 57, 1),
         unselectedItemColor: Color.fromRGBO(158, 167, 182, 1),
       ),
+      progressIndicatorTheme: ProgressIndicatorThemeData(color: color),
       listTileTheme: ListTileThemeData(
           selectedColor: color,
           shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(radius))));
