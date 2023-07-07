@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_smena/app/router.dart';
+import 'package:test_smena/layers/bloc/categories/category_bloc.dart';
+import 'package:test_smena/layers/bloc/categories/category_event.dart';
+import 'package:test_smena/layers/bloc/categories/category_state.dart';
+import 'package:test_smena/layers/ui/categories/card.dart';
+
+CategoryBloc _bloc(BuildContext context) => BlocProvider.of(context);
 
 class CategoryRoute implements AppPage {
   final int categoryId;
@@ -16,14 +23,75 @@ class CategoryRoute implements AppPage {
   Map<String, String>? get queryParams => null;
 }
 
-class CategoryPage extends StatelessWidget {
+class CategoryPage extends StatefulWidget {
   static AppPage route(int id) => CategoryRoute(id);
 
   const CategoryPage(this.id, {super.key});
   final int id;
 
   @override
+  State<CategoryPage> createState() => _CategoryPageState();
+}
+
+class _CategoryPageState extends State<CategoryPage> {
+  late final CategoryBloc menuBloc = CategoryBloc(widget.id);
+
+  @override
+  void initState() {
+    menuBloc.add(OnLoad(widget.id));
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return BlocProvider.value(
+      value: menuBloc,
+      child: BlocBuilder<CategoryBloc, CategoryState>(
+        bloc: menuBloc,
+        builder: (context, state) {
+          //TODO(kirill): error state
+          if (state is LoadedState) {
+            return _Body(state: state);
+          }
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _Body extends StatelessWidget {
+  const _Body({required this.state});
+
+  final LoadedState state;
+
+  @override
+  Widget build(BuildContext context) {
+    return RefreshIndicator(
+      onRefresh: () async => _bloc(context).add(const OnRefresh()),
+      child: Padding(
+        padding: const EdgeInsets.only(left: 10, right: 9),
+        child: CustomScrollView(
+          slivers: [
+            SliverGrid.count(
+              crossAxisCount: 2,
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 10,
+              childAspectRatio: 1 / 1.5,
+              children: state.category.products
+                  .map(
+                    (item) => ProductCard(
+                      item,
+                      onTap: () {},
+                    ),
+                  )
+                  .toList(),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
