@@ -53,4 +53,14 @@ class BascetProduct extends HiveObject {
       sizes: item.sizes,
     );
   }
+
+  Product toProduct() => Product(
+        id: id,
+        categoryId: categoryId,
+        cost: cost,
+        name: name,
+        imageUrl: imageUrl,
+        sizes: sizes,
+        description: description,
+      );
 }

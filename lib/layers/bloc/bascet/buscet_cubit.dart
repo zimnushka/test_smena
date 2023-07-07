@@ -5,20 +5,20 @@ import 'package:test_smena/layers/models/schemes.dart';
 import 'package:test_smena/layers/services/bascet.dart';
 
 class BascetState {
-  final List<BascetProduct> products;
+  final Map<int, BascetProduct> products;
 
   const BascetState({required this.products});
 }
 
 class BascetProvider extends Cubit<BascetState> {
-  BascetProvider() : super(const BascetState(products: [])) {
+  BascetProvider() : super(const BascetState(products: {})) {
     load();
   }
 
   final BascetService _service = BascetService();
 
   Future<void> load() async {
-    final products = await _service.getBuscetAsList();
+    final products = await _service.getBuscetAsMap();
     emit(BascetState(products: products));
   }
 
