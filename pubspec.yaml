@@ -30,6 +30,8 @@ dependencies:
 
   # Storage
   shared_preferences: 2.2.0
+  hive: 2.2.2
+  hive_flutter: 1.1.0
 
   # Generations
   json_annotation: any
@@ -48,6 +50,8 @@ dev_dependencies:
   json_serializable: any
   build_runner: any
   freezed: any
+
+  hive_generator: any
 
   flutter_lints: ^2.0.0
 

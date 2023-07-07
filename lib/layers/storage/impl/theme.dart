@@ -5,7 +5,6 @@ class ThemeStorage implements AppStorage<bool> {
   @override
   String get storageKey => 'ThemeStorageKey';
 
-  @override
   Future<bool?> get() async {
     final pref = await SharedPreferences.getInstance();
     try {
@@ -15,7 +14,6 @@ class ThemeStorage implements AppStorage<bool> {
     }
   }
 
-  @override
   Future<bool> save(bool isLightTheme) async {
     final pref = await SharedPreferences.getInstance();
     try {
@@ -25,7 +23,6 @@ class ThemeStorage implements AppStorage<bool> {
     }
   }
 
-  @override
   Future<bool> delete() async {
     final pref = await SharedPreferences.getInstance();
     try {
