@@ -1,4 +1,5 @@
 import 'package:test_smena/layers/bloc/app_event.dart';
+import 'package:test_smena/layers/models/schemes.dart';
 
 class CategoryEvent implements AppEvent {}
 
@@ -12,19 +13,7 @@ class OnRefresh implements CategoryEvent {
 }
 
 class OnTapProduct implements CategoryEvent {
-  final int id;
+  final Product item;
 
-  const OnTapProduct(this.id);
-}
-
-class OnTapPlusProduct implements CategoryEvent {
-  final int id;
-
-  const OnTapPlusProduct(this.id);
-}
-
-class OnTapMinusProduct implements CategoryEvent {
-  final int id;
-
-  const OnTapMinusProduct(this.id);
+  const OnTapProduct(this.item);
 }

@@ -6,6 +6,7 @@ import 'package:test_smena/layers/models/bascet_product.dart';
 import 'package:test_smena/layers/styles/text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:test_smena/layers/ui/bascet/card.dart';
+import 'package:test_smena/layers/ui/widgets/product_detail.dart';
 
 BascetProvider _bloc(BuildContext context) => BlocProvider.of(context);
 
@@ -49,7 +50,17 @@ class BuscetPage extends StatelessWidget {
               SliverList(
                 delegate: SliverChildBuilderDelegate(
                   (context, index) {
-                    return BascetProductCard(products[index], onTap: () {});
+                    return BascetProductCard(products[index], onTap: () async {
+                      await showModalBottomSheet(
+                        useSafeArea: true,
+                        isScrollControlled: true,
+                        isDismissible: true,
+                        context: AppRouter.context,
+                        builder: (context) {
+                          return ProductDetail(products[index].toProduct());
+                        },
+                      );
+                    });
                   },
                   childCount: state.products.length,
                 ),

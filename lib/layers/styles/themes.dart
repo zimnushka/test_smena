@@ -16,6 +16,16 @@ ThemeData setPrimaryColor(bool isLightTheme, Color color) {
   ));
 
   return data.copyWith(
+      bottomSheetTheme: const BottomSheetThemeData(
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+          top: Radius.circular(
+            16,
+          ),
+        )),
+        showDragHandle: true,
+      ),
       textSelectionTheme: TextSelectionThemeData(
         cursorColor: color,
         selectionColor: Colors.grey.withOpacity(0.3),

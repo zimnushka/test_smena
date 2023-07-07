@@ -97,7 +97,7 @@ class _Body extends StatelessWidget {
                   .map(
                     (item) => ProductCard(
                       item,
-                      onTap: () {},
+                      onTap: () => _bloc(context).add(OnTapProduct(item)),
                     ),
                   )
                   .toList(),

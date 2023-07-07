@@ -10,53 +10,56 @@ class BascetProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Row(
-          children: [
-            SizedBox(
-              width: 80,
-              child: Image.network(item.imageUrl),
-            ),
-            const SizedBox(width: 10),
-            Expanded(
-                child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                AppSmallText(
-                  item.name,
-                  weight: FontWeight.w600,
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        AppText(
-                          '${item.cost} ₽',
-                          weight: FontWeight.w800,
-                        ),
-                        AppSmallText(
-                          item.sizes,
-                          weight: FontWeight.w600,
-                        ),
-                      ],
-                    ),
-                    const Expanded(child: SizedBox()),
-                    AddProductButton(item.toProduct()),
-                    const SizedBox(width: 15),
-                  ],
-                ),
-              ],
-            )),
-          ],
-        ),
-        const Divider(),
-      ],
+    return InkWell(
+      onTap: onTap,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            children: [
+              SizedBox(
+                width: 80,
+                child: Image.network(item.imageUrl),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                  child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AppSmallText(
+                    item.name,
+                    weight: FontWeight.w600,
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          AppText(
+                            '${item.cost} ₽',
+                            weight: FontWeight.w800,
+                          ),
+                          AppSmallText(
+                            item.sizes,
+                            weight: FontWeight.w600,
+                          ),
+                        ],
+                      ),
+                      const Expanded(child: SizedBox()),
+                      AddProductButton(item.toProduct()),
+                      const SizedBox(width: 15),
+                    ],
+                  ),
+                ],
+              )),
+            ],
+          ),
+          const Divider(),
+        ],
+      ),
     );
   }
 }

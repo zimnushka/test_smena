@@ -5,7 +5,6 @@ import 'package:test_smena/app/configs.dart';
 import 'package:test_smena/layers/repositories/repository.dart';
 import 'package:test_smena/layers/storage/impl/config.dart';
 import 'package:test_smena/layers/storage/impl/theme.dart';
-import 'package:test_smena/layers/storage/storage.dart';
 import 'package:test_smena/layers/styles/colors.dart';
 import 'package:test_smena/layers/styles/themes.dart';
 
@@ -38,8 +37,6 @@ class AppProvider extends Cubit<AppProviderState> {
   final _configStorage = ConfigStorage();
 
   Future<void> load() async {
-    await AppStorage.init();
-
     final isLightTheme = (await _themeStorage.get()) ?? true;
     final config = (await _configStorage.read()) ?? defaultConfig;
 

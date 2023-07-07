@@ -1,7 +1,8 @@
 # test_smena
 For generate and get pubs use
-
-'❯ sh sh_regenerate_schemes.sh '
+```
+sh sh_regenerate_schemes.sh
+```
 ## Flutter version
 - Flutter (Channel stable, 3.10.3, on macOS 13.4 22F66 darwin-arm64, locale ru-RU)
 - Android toolchain - develop for Android devices (Android SDK version 33.0.0)
